@@ -8,6 +8,7 @@
     {"id": "wiki-maintain", "target_type": "skill", "surfaces": ["claude", "codex"], "hash": "5f6f4c87555981227ecf63607df71bb61c196888d1a3e41358660e45411536d0"},
     {"id": "capture", "target_type": "skill", "surfaces": ["claude", "codex"], "hash": "d5cc7c51157073c1c29692bd3e0c9f1fb4dd6cbbb03e435920364b2eff50aed7"},
     {"id": "digest", "target_type": "skill", "surfaces": ["claude", "codex"], "hash": "dcead1a49366d28ae7adc08789144955f8fdcdb8173185d38a8be716fec0913d"},
-    {"id": "research", "target_type": "skill", "surfaces": ["claude", "codex"], "hash": "bbc50b9fd82720b9d3a6d0d77f97ff2486698ff0c4d054e6356a557c43b4efa5"}
+    {"id": "research", "target_type": "skill", "surfaces": ["claude", "codex"], "hash": "bbc50b9fd82720b9d3a6d0d77f97ff2486698ff0c4d054e6356a557c43b4efa5"},
+    {"id": "kickstart-assistant", "target_type": "skill", "surfaces": ["claude", "codex"], "hash": "d0b776640749740085b59aa11aada64c84d096c8c898c222dfd93f8cbbcbc44c"}
   ]
 }

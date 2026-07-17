@@ -2,6 +2,8 @@
   "schema_version": 1,
   "hash_method": "sha256 over the concatenated contents of all files in the artifact's directory, paths sorted (LC_ALL=C)",
   "artifacts": [
-    {"id": "council", "target_type": "skill", "surfaces": ["claude", "codex"], "hash": "71f2a42820f5dde2f46bfe2a2fd19c380677ed7248f28948b231d1651a804b0a"}
+    {"id": "council", "target_type": "skill", "surfaces": ["claude", "codex"], "hash": "71f2a42820f5dde2f46bfe2a2fd19c380677ed7248f28948b231d1651a804b0a"},
+    {"id": "lessons", "target_type": "skill", "surfaces": ["claude", "codex"], "hash": "808e3a0c198e1974c3ad9f035904b79dd9746d68981aa94c24570cc7e2fb6418"},
+    {"id": "learn", "target_type": "command+skill", "surfaces": ["claude", "codex"], "claude_target": ".claude/commands/learn.md", "codex_target": ".agents/skills/learn/SKILL.md", "hash": "83835bdcdea3368f01578c655aff6e4fc63542f35772c14db811bbc614bded9a"}
   ]
 }

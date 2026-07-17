@@ -9,6 +9,10 @@
     {"id": "capture", "target_type": "skill", "surfaces": ["claude", "codex"], "hash": "d5cc7c51157073c1c29692bd3e0c9f1fb4dd6cbbb03e435920364b2eff50aed7"},
     {"id": "digest", "target_type": "skill", "surfaces": ["claude", "codex"], "hash": "dcead1a49366d28ae7adc08789144955f8fdcdb8173185d38a8be716fec0913d"},
     {"id": "research", "target_type": "skill", "surfaces": ["claude", "codex"], "hash": "bbc50b9fd82720b9d3a6d0d77f97ff2486698ff0c4d054e6356a557c43b4efa5"},
-    {"id": "kickstart-assistant", "target_type": "skill", "surfaces": ["claude", "codex"], "hash": "d0b776640749740085b59aa11aada64c84d096c8c898c222dfd93f8cbbcbc44c"}
+    {"id": "kickstart-assistant", "target_type": "skill", "surfaces": ["claude", "codex"], "hash": "d0b776640749740085b59aa11aada64c84d096c8c898c222dfd93f8cbbcbc44c"},
+    {"id": "grill-me-codex", "target_type": "skill", "surfaces": ["claude"], "hash": "d83034dc166fd1eb08a1b54797560d71108d72509fd34a85f0e1c3af5ebd98c0"},
+    {"id": "grill-with-docs-codex", "target_type": "skill", "surfaces": ["claude"], "hash": "eb7aaf8b50f623863c3ac766452c452f365fcf8d14afcbbaf3ed9a99f5506252"},
+    {"id": "codex-build", "target_type": "skill", "surfaces": ["claude"], "hash": "31cb7b906a52a2e58454ec964c8c942f732f467aa87882f06913b432a3c07ac4"},
+    {"id": "codex-review", "target_type": "skill", "surfaces": ["claude"], "hash": "a747ab1dadbe163216be042f7f62dd2014ebd2d3f5ba2066b1ce71b54c6f8dbb"}
   ]
 }

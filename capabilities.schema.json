@@ -1,0 +1,71 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "fxblanco-methods consumer capabilities",
+  "description": "Each consumer repo provides a .methodik-capabilities.json at its root matching this schema. sync-consumer.sh validates it before materializing anything.",
+  "type": "object",
+  "required": ["runtimes", "state_backend", "retrieval_stages", "instruction_modules", "enabled_surfaces"],
+  "properties": {
+    "runtimes": {
+      "type": "object",
+      "description": "One entry per runtime this consumer actually uses. A Claude-only consumer omits 'codex' entirely.",
+      "properties": {
+        "claude": {
+          "type": "object",
+          "required": ["memory_path", "parallel_work_mechanism"],
+          "properties": {
+            "memory_path": {"type": "string"},
+            "parallel_work_mechanism": {"type": "string", "description": "e.g. \"Agent tool\""}
+          }
+        },
+        "codex": {
+          "type": "object",
+          "required": ["memory_path", "parallel_work_mechanism"],
+          "properties": {
+            "memory_path": {"type": "string"},
+            "parallel_work_mechanism": {"type": "string"}
+          }
+        }
+      },
+      "minProperties": 1
+    },
+    "state_backend": {"type": "string", "enum": ["none", "d1", "other"]},
+    "state_endpoint": {"type": "string", "description": "Required if state_backend != 'none'."},
+    "state_access": {
+      "type": "object",
+      "description": "Required if state_backend != 'none'. Never put secret VALUES here — env var references only.",
+      "properties": {
+        "method": {"type": "string"},
+        "auth_header": {"type": "string"},
+        "auth_env_ref": {"type": "string", "description": "Name of the env var holding the secret — not the secret itself."},
+        "schema_header": {"type": "string"}
+      }
+    },
+    "retrieval_stages": {
+      "type": "array",
+      "items": {"type": "string"},
+      "description": "Ordered, richest-first. e.g. [\"memory\",\"graph\",\"state\",\"sources\",\"web\"]"
+    },
+    "storage_path_pattern": {"type": "string", "description": "Where captured/raw content lands, e.g. \"knowledge/<domain>/raw/\"."},
+    "indexer_command": {"type": "string", "description": "Optional. Command to regenerate the knowledge index after structural changes."},
+    "instruction_modules": {
+      "type": "array",
+      "items": {"type": "string"},
+      "description": "Which methods/*.md (and optionally personal-profile) get rendered into this consumer's root instruction files."
+    },
+    "enabled_surfaces": {
+      "type": "array",
+      "items": {"type": "string", "enum": ["claude", "codex"]},
+      "description": "Which runtimes THIS CONSUMER actually wants skills materialized for — intersected with each artifact's own `surfaces` in manifest.json."
+    }
+  },
+  "allOf": [
+    {
+      "if": {"properties": {"state_backend": {"const": "d1"}}},
+      "then": {"required": ["state_endpoint", "state_access"]}
+    },
+    {
+      "if": {"properties": {"state_backend": {"const": "other"}}},
+      "then": {"required": ["state_endpoint", "state_access"]}
+    }
+  ]
+}

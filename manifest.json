@@ -5,6 +5,9 @@
     {"id": "council", "target_type": "skill", "surfaces": ["claude", "codex"], "hash": "71f2a42820f5dde2f46bfe2a2fd19c380677ed7248f28948b231d1651a804b0a"},
     {"id": "lessons", "target_type": "skill", "surfaces": ["claude", "codex"], "hash": "808e3a0c198e1974c3ad9f035904b79dd9746d68981aa94c24570cc7e2fb6418"},
     {"id": "learn", "target_type": "command+skill", "surfaces": ["claude", "codex"], "claude_target": ".claude/commands/learn.md", "codex_target": ".agents/skills/learn/SKILL.md", "hash": "83835bdcdea3368f01578c655aff6e4fc63542f35772c14db811bbc614bded9a"},
-    {"id": "wiki-maintain", "target_type": "skill", "surfaces": ["claude", "codex"], "hash": "5f6f4c87555981227ecf63607df71bb61c196888d1a3e41358660e45411536d0"}
+    {"id": "wiki-maintain", "target_type": "skill", "surfaces": ["claude", "codex"], "hash": "5f6f4c87555981227ecf63607df71bb61c196888d1a3e41358660e45411536d0"},
+    {"id": "capture", "target_type": "skill", "surfaces": ["claude", "codex"], "hash": "d5cc7c51157073c1c29692bd3e0c9f1fb4dd6cbbb03e435920364b2eff50aed7"},
+    {"id": "digest", "target_type": "skill", "surfaces": ["claude", "codex"], "hash": "dcead1a49366d28ae7adc08789144955f8fdcdb8173185d38a8be716fec0913d"},
+    {"id": "research", "target_type": "skill", "surfaces": ["claude", "codex"], "hash": "bbc50b9fd82720b9d3a6d0d77f97ff2486698ff0c4d054e6356a557c43b4efa5"}
   ]
 }

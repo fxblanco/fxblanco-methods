@@ -45,7 +45,9 @@
       "items": {"type": "string"},
       "description": "Ordered, richest-first. e.g. [\"memory\",\"graph\",\"state\",\"sources\",\"web\"]"
     },
-    "storage_path_pattern": {"type": "string", "description": "Where captured/raw content lands, e.g. \"knowledge/<domain>/raw/\"."},
+    "storage_path_pattern": {"type": "string", "description": "Where captured/raw content lands, with a <domain> placeholder, e.g. \"knowledge/<domain>/raw/\". Required by the capture/digest/research pipeline — see skills/storage-contract.md."},
+    "inbox_path": {"type": "string", "description": "Optional. Where captures without a clear topic area land. Default: storage_path_pattern with <domain> -> \"_inbox\" and any trailing \"raw/\" dropped."},
+    "knowledge_path_pattern": {"type": "string", "description": "Optional. The condensed knowledge layer, with a <domain> placeholder. Default: storage_path_pattern with its trailing \"raw/\" replaced by \"wiki/\". Must be set explicitly if the raw pattern doesn't end in \"raw/\"."},
     "indexer_command": {"type": "string", "description": "Optional. Command to regenerate the knowledge index after structural changes."},
     "instruction_modules": {
       "type": "array",

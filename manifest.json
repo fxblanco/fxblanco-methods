@@ -1,4 +1,7 @@
 {
   "schema_version": 1,
-  "artifacts": []
+  "hash_method": "sha256 over the concatenated contents of all files in the artifact's directory, paths sorted (LC_ALL=C)",
+  "artifacts": [
+    {"id": "council", "target_type": "skill", "surfaces": ["claude", "codex"], "hash": "71f2a42820f5dde2f46bfe2a2fd19c380677ed7248f28948b231d1651a804b0a"}
+  ]
 }

@@ -96,7 +96,10 @@ for i in $(seq 0 $((ARTIFACT_COUNT - 1))); do
         if [ "$surface" = "codex" ]; then
           CODEX_TARGET=$(echo "$ART" | jq -r '.codex_target')
           mkdir -p "$(dirname "$CONSUMER_ROOT/$CODEX_TARGET")"
-          cp -r "$VENDOR/skills/$ID" "$(dirname "$CONSUMER_ROOT/$CODEX_TARGET")" 2>/dev/null || true
+          # File-to-file copy (renaming METHOD.md -> SKILL.md), NOT `cp -r` of the
+          # source dir into the already-mkdir'd target dir (that nests source-inside-target,
+          # e.g. .agents/skills/learn/learn/METHOD.md instead of .agents/skills/learn/SKILL.md).
+          cp "$VENDOR/skills/$ID/METHOD.md" "$CONSUMER_ROOT/$CODEX_TARGET" 2>/dev/null || true
           echo "  materialized (codex skill): $CODEX_TARGET"
         fi
         ;;

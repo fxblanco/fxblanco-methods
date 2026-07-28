@@ -54,6 +54,11 @@ if [ -f "$MANIFEST_OUT" ]; then
 fi
 
 if [ "$MODE" = "check" ]; then
+  HOOK=$(jq -r '.consumer_sync_hook // empty' "$CAPS_FILE")
+  if [ -n "$HOOK" ]; then
+    [ -f "$CONSUMER_ROOT/$HOOK" ] || fail "consumer_sync_hook fehlt: $HOOK"
+    node "$CONSUMER_ROOT/$HOOK" check
+  fi
   echo "sync-consumer: OK (read-only Integritäts-Check bestanden, SHA=$(git -C "$VENDOR" rev-parse HEAD))"
   exit 0
 fi
@@ -112,6 +117,16 @@ for i in $(seq 0 $((ARTIFACT_COUNT - 1))); do
   H=$(hash_dir "$VENDOR/skills/$ID" 2>/dev/null || echo "n/a")
   MATERIALIZED_HASHES=$(echo "$MATERIALIZED_HASHES" | jq --arg id "$ID" --arg h "$H" '. + [{"id":$id,"hash":$h}]')
 done
+
+# ── Consumer-owned materialization hook ────────────────────────────────────
+# Domain/private skills stay in their consumer repo. The hook gives them the
+# same deterministic sync/check lifecycle without publishing private content
+# into fxblanco-methods.
+HOOK=$(jq -r '.consumer_sync_hook // empty' "$CAPS_FILE")
+if [ -n "$HOOK" ]; then
+  [ -f "$CONSUMER_ROOT/$HOOK" ] || fail "consumer_sync_hook fehlt: $HOOK"
+  node "$CONSUMER_ROOT/$HOOK" sync
+fi
 
 # ── Root-Injection: pro instruction_module ein eigener SHA-markierter Block ──
 for mod in $(jq -r '.instruction_modules[]' "$CAPS_FILE"); do

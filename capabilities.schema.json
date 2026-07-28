@@ -37,8 +37,34 @@
         "method": {"type": "string"},
         "auth_header": {"type": "string"},
         "auth_env_ref": {"type": "string", "description": "Name of the env var holding the secret — not the secret itself."},
-        "schema_header": {"type": "string"}
+        "schema_header": {"type": "string"},
+        "credential_config": {"type": "string", "description": "Optional config path used by the native client. Never put a secret value here."},
+        "read_command": {"type": "string", "description": "Canonical native read entrypoint, when the host exposes one."},
+        "write_command": {"type": "string", "description": "Canonical native action-state write entrypoint, when the host exposes one."},
+        "operation_command": {"type": "string", "description": "Canonical native operational-state commit entrypoint, when the host exposes one."}
       }
+    },
+    "local_skill_mirrors": {
+      "type": "array",
+      "description": "Consumer-owned skills that a consumer hook deterministically mirrors from one canonical surface to other enabled surfaces.",
+      "items": {
+        "type": "object",
+        "required": ["id", "source_surface", "target_surfaces"],
+        "properties": {
+          "id": {"type": "string", "pattern": "^[a-z0-9-]+$"},
+          "source_surface": {"type": "string", "enum": ["claude", "codex"]},
+          "target_surfaces": {
+            "type": "array",
+            "items": {"type": "string", "enum": ["claude", "codex"]},
+            "minItems": 1,
+            "uniqueItems": true
+          }
+        }
+      }
+    },
+    "consumer_sync_hook": {
+      "type": "string",
+      "description": "Optional executable consumer-relative hook. Called with sync or check after vendor artifact handling."
     },
     "retrieval_stages": {
       "type": "array",

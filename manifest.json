@@ -18,6 +18,6 @@
     {"id": "quick", "target_type": "skill", "surfaces": ["claude", "codex"], "hash": "4ce848cda9dd7cbfb0ac0dc1912f0356c042e8b775f31e8dd0ceef0df800f2c2"},
     {"id": "wait-what", "target_type": "skill", "surfaces": ["claude", "codex"], "hash": "8d435a54e1bd0346edf962ceed84c2f552239ca17e6c53ea164a4de76f53be86"},
     {"id": "yt-transcript-deepdive", "target_type": "skill", "surfaces": ["claude", "codex"], "hash": "cceecf6cdcfce8c81ca652d1ab2a0475d5866eb42ba2630469cf946222a5c45e"},
-    {"id": "sanitize-prompt", "target_type": "skill", "surfaces": ["claude", "codex"], "hash": "fba8a4b4af9f62494439f804a5ac121b2db82ab236a5c4b81d6ed6b28fb0cffb"}
+    {"id": "sanitize-prompt", "target_type": "skill", "surfaces": ["claude", "codex"], "hash": "8a804907e08ab3c6175fe67119c1919862fc48c02cbb19384a57964dda115ac3"}
   ]
 }

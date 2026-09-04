@@ -34,10 +34,15 @@ Add this entry to `hooks.UserPromptSubmit` (global settings = fires in every pro
 ## How it works
 
 1. You submit a prompt.
-2. The hook measures its size. Small / slash-command → passes through untouched.
-3. Large (≥ `THRESHOLD` chars, default 900) → the hook injects a directive telling
-   Claude to invoke the `sanitize-prompt` skill before acting.
-4. The skill separates the real goal from the noise, mirrors it in one line, and
+2. The hook checks its SHAPE, not just its length. Slash-command → passes through.
+3. It fires when the prompt looks like a burst dump — either length ≥ `LENGTH_FLOOR`
+   (default 400 chars) OR a burst-score ≥ `SCORE_FLOOR` (default 2). The score counts
+   ramble signals: lots of branching/hedging words (oder / vielleicht / irgendwie …),
+   two or more question marks, an ich+du actor mix, or one long comma-heavy sentence.
+   So a short WIRR prompt is caught while a short CLEAR one stays silent.
+4. On a fire, the hook injects a directive telling Claude to invoke the
+   `sanitize-prompt` skill before acting.
+5. The skill separates the real goal from the noise, mirrors it in one line, and
    asks exactly one clarifying question only when the intent is unclear.
 
 The hook never blocks a prompt (any error → silent pass). The skill must not nag:
@@ -45,8 +50,10 @@ a clear prompt gets a one-line goal mirror and nothing else.
 
 ## Tuning
 
-Edit `THRESHOLD` in the hook script (both the canonical copy here and the installed
-copy in `~/.claude/hooks/`). Higher = fires less often.
+Edit `LENGTH_FLOOR` / `SCORE_FLOOR` in the hook script (both the canonical copy here
+and the installed copy in `~/.claude/hooks/`). Higher `LENGTH_FLOOR` = fires less on
+length; higher `SCORE_FLOOR` = fires less on burst-shape. Widen the ramble-word regex
+in `burstScore()` to catch more dictation tics.
 
 > Note: hook and skill are currently a documented manual install. If this pattern
 > proves useful, the follow-up is a `hook` target_type in `manifest.json` +

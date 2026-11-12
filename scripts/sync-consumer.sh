@@ -76,6 +76,15 @@ for i in $(seq 0 $((ARTIFACT_COUNT - 1))); do
   TARGET_TYPE=$(echo "$ART" | jq -r '.target_type')
   ART_SURFACES=$(echo "$ART" | jq -r '.surfaces | join(",")')
 
+  # Consumer opt-out: ids in capabilities.disabled_artifacts are not materialized;
+  # symlinks a previous sync created for them are removed.
+  if jq -e --arg id "$ID" '(.disabled_artifacts // []) | index($id) != null' "$CAPS_FILE" >/dev/null; then
+    for r in .claude/skills .agents/skills; do
+      [ -L "$CONSUMER_ROOT/$r/$ID" ] && rm "$CONSUMER_ROOT/$r/$ID" && echo "  removed (disabled): $r/$ID"
+    done
+    continue
+  fi
+
   for surface in claude codex; do
     echo "$ART_SURFACES" | grep -q "$surface" || continue
     echo "$ENABLED_SURFACES" | grep -q "$surface" || continue

@@ -84,6 +84,11 @@
       "type": "array",
       "items": {"type": "string", "enum": ["claude", "codex"]},
       "description": "Which runtimes THIS CONSUMER actually wants skills materialized for — intersected with each artifact's own `surfaces` in manifest.json."
+    },
+    "disabled_artifacts": {
+      "type": "array",
+      "items": {"type": "string"},
+      "description": "Artifact ids from manifest.json this consumer does not want. sync skips them and removes symlinks it created for them."
     }
   },
   "allOf": [
